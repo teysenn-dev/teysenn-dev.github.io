@@ -9,10 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Fond vidéo YouTube muet -->
-  <div class="video-background">
-    <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&controls=0&showinfo=0&loop=1&playlist=VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
+  <!-- Fond vidéo locale -->
+  <video class="video-background" autoplay loop muted playsinline>
+    <source src="assets/background.mp4" type="video/mp4">
+    Votre navigateur ne supporte pas la vidéo HTML5.
+  </video>
 
   <!-- Canvas pour les particules -->
   <canvas id="particles-canvas"></canvas>
@@ -38,9 +39,8 @@
           <img src="" alt="Photo de profil Discord" class="profile-pic-discord">
         </div>
 
-        <!-- Pseudo avec effet sparkle -->
+        <!-- Pseudo sans effet sparkle -->
         <div class="username-container">
-          <img src="https://assets.guns.lol/sparkle_black.gif" alt="sparkle" class="sparkle-effect">
           <h1 class="username-discord"></h1>
         </div>
 
@@ -81,34 +81,16 @@
         <!-- Logos sociaux -->
         <div class="social-logos">
           <button class="social-btn" title="Site Web">
-            <svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="2" fill="none"/>
-              <ellipse cx="14" cy="14" rx="12" ry="4" stroke="currentColor" stroke-width="2" fill="none"/>
-              <line x1="2" y1="14" x2="26" y2="14" stroke="currentColor" stroke-width="2"/>
-              <path d="M14 2C17 7 17 21 14 26" stroke="currentColor" stroke-width="2" fill="none"/>
-              <path d="M14 2C11 7 11 21 14 26" stroke="currentColor" stroke-width="2" fill="none"/>
-            </svg>
+            <img src="" alt="Site Web" class="social-img">
           </button>
           <button class="social-btn" title="Discord">
-            <svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="4" y="8" width="20" height="12" rx="6" fill="currentColor"/>
-              <circle cx="10" cy="16" r="2" fill="white"/>
-              <circle cx="18" cy="16" r="2" fill="white"/>
-            </svg>
+            <img src="" alt="Discord" class="social-img">
           </button>
           <button class="social-btn" title="Spotify">
-            <svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="14" cy="14" r="12" stroke="currentColor" stroke-width="2" fill="none"/>
-              <path d="M9 18C13 16 19 16 19 18" stroke="currentColor" stroke-width="2" fill="none"/>
-              <path d="M10 14C13 13 17 13 18 14" stroke="currentColor" stroke-width="2" fill="none"/>
-              <path d="M11 10C14 9.5 16 9.5 17 10" stroke="currentColor" stroke-width="2" fill="none"/>
-            </svg>
+            <img src="" alt="Spotify" class="social-img">
           </button>
           <button class="social-btn" title="Portfolio">
-            <svg class="logo-svg" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="6" width="16" height="16" rx="4" stroke="currentColor" stroke-width="2" fill="none"/>
-              <rect x="10" y="10" width="8" height="8" rx="2" fill="currentColor"/>
-            </svg>
+            <img src="" alt="Portfolio" class="social-img">
           </button>
         </div>
 
@@ -136,9 +118,10 @@
   <!-- Conteneur pour les particules du curseur -->
   <div id="cursor-particles"></div>
 
-  <!-- Audio de fond -->
-  <audio id="background-audio" loop>
+  <!-- Audio de fond simple -->
+  <audio id="background-audio" autoplay loop>
     <source src="assets/music.mp3" type="audio/mpeg">
+    Votre navigateur ne supporte pas l'audio HTML5.
   </audio>
 
   <script src="script.js"></script>

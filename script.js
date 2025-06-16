@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initialiser les effets
-  setupTilt3D('.profile-card');
-  setupTilt3D('.discord-info-col');
+  // setupTilt3D('.profile-card'); // SUPPRIMÉ
+  // setupTilt3D('.discord-info-col'); // SUPPRIMÉ
   setupVolumeControl();
   setupParticles();
   setupCursorParticles();
@@ -33,25 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // === Animation tilt 3D sur la carte principale et la colonne Discord ===
-function setupTilt3D(selector) {
-  const el = document.querySelector(selector);
-  if (!el) return;
-  el.addEventListener('mousemove', (e) => {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rx = ((y - rect.height / 2) / rect.height) * 16;
-    const ry = ((x - rect.width / 2) / rect.width) * 16;
-    el.style.setProperty('--rx', `${-rx}deg`);
-    el.style.setProperty('--ry', `${ry}deg`);
-    el.classList.add('tilt');
-  });
-  el.addEventListener('mouseleave', () => {
-    el.style.setProperty('--rx', '0deg');
-    el.style.setProperty('--ry', '0deg');
-    el.classList.remove('tilt');
-  });
-}
+// function setupTilt3D(selector) {
+//   const el = document.querySelector(selector);
+//   if (!el) return;
+//   el.addEventListener('mousemove', (e) => {
+//     const rect = el.getBoundingClientRect();
+//     const x = e.clientX - rect.left;
+//     const y = e.clientY - rect.top;
+//     const rx = ((y - rect.height / 2) / rect.height) * 16;
+//     const ry = ((x - rect.width / 2) / rect.width) * 16;
+//     el.style.setProperty('--rx', `${-rx}deg`);
+//     el.style.setProperty('--ry', `${ry}deg`);
+//     el.classList.add('tilt');
+//   });
+//   el.addEventListener('mouseleave', () => {
+//     el.style.setProperty('--rx', '0deg');
+//     el.style.setProperty('--ry', '0deg');
+//     el.classList.remove('tilt');
+//   });
+// }
 
 // === Volume bouton/slider ===
 function setupVolumeControl() {
