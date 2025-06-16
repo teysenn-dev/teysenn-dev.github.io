@@ -3,71 +3,149 @@ body {
   min-height: 100vh;
   margin: 0;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(120deg, #181a20 0%, #23243a 100%);
-  color: #f5f6fa;
+  background: #111;
+  color: #fff;
   overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* --- Cartes principales --- */
 .profile-card, .discord-card, .music-card {
-  background: rgba(28,30,40,0.97);
+  background: #181818;
   border-radius: 28px;
-  box-shadow: 0 8px 32px 0 #181a2040, 0 1.5px 16px 0 #0003;
+  box-shadow: 0 8px 32px 0 #fff2, 0 1.5px 16px 0 #0008;
   border: none;
-  margin: 0 auto 32px auto;
   padding: 36px 32px;
-  max-width: 480px;
-  width: 95vw;
-  transition: box-shadow 0.3s;
+  min-width: 320px;
+  max-width: 95vw;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin: 32px 0;
+  transition: box-shadow 0.4s, transform 0.4s;
+  will-change: transform;
 }
 .profile-card {
   margin-top: 60px;
+}
+.profile-card.tilt {
+  box-shadow: 0 16px 64px 0 #fff5, 0 2px 24px 0 #000a;
+  transform: scale(1.03) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
 }
 .profile-card:hover, .discord-card:hover, .music-card:hover {
   box-shadow: 0 12px 48px 0 #7f5fff33, 0 2px 24px 0 #0005;
 }
 
-/* --- Boutons d'icônes modernes --- */
-.icon-btn {
+.profile-pic-discord {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 24px #fff3;
+  background: #222;
+  margin-bottom: 8px;
+}
+
+.username-discord {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.status-discord {
+  font-size: 1.1rem;
+  color: #222;
+  background: #fff;
+  border-radius: 8px;
+  padding: 2px 10px;
+  margin-bottom: 2px;
+  display: inline-block;
+}
+.activity-discord {
+  font-size: 1rem;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.spotify-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 10px 18px;
+  box-shadow: 0 2px 12px #fff2;
+  margin-top: 8px;
+  color: #111;
+}
+.spotify-cover {
+  width: 54px;
+  height: 54px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px #fff3;
+}
+.spotify-title {
+  font-weight: 600;
+  color: #111;
+  font-size: 1.1rem;
+}
+.spotify-artist {
+  color: #444;
+  font-size: 1rem;
+  display: block;
+}
+
+.social-logos {
+  display: flex;
+  gap: 18px;
+  margin-top: 10px;
+}
+.social-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #fff;
+  color: #111;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  background: #23243a;
-  color: #7f5fff;
-  box-shadow: 0 2px 8px #23243a33;
   font-size: 1.7rem;
+  box-shadow: 0 2px 8px #fff2;
   border: none;
   outline: none;
-  margin: 0 8px;
-  position: relative;
   cursor: pointer;
+  margin: 0 6px;
+  position: relative;
   transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
   z-index: 1;
 }
-.icon-btn:hover {
-  background: #35355a;
-  color: #a084ff;
-  box-shadow: 0 4px 16px #7f5fff33;
+.social-btn:hover {
+  background: #111;
+  color: #fff;
+  box-shadow: 0 4px 16px #fff5;
   transform: scale(1.08);
 }
 
-/* --- Particules autour des boutons --- */
-.icon-btn .btn-particle {
+/* Particules autour des boutons */
+.social-btn .btn-particle {
   position: absolute;
   border-radius: 50%;
-  background: #a084ff;
+  background: #fff;
   opacity: 0.18;
   pointer-events: none;
   animation: btnParticleAnim 2.2s infinite linear;
 }
-.icon-btn .btn-particle1 {
+.social-btn .btn-particle1 {
   width: 8px; height: 8px; left: 6px; top: 6px; animation-delay: 0s; }
-.icon-btn .btn-particle2 {
+.social-btn .btn-particle2 {
   width: 5px; height: 5px; right: 8px; top: 10px; animation-delay: 0.7s; }
-.icon-btn .btn-particle3 {
+.social-btn .btn-particle3 {
   width: 6px; height: 6px; left: 14px; bottom: 7px; animation-delay: 1.2s; }
 @keyframes btnParticleAnim {
   0% { transform: scale(1) translateY(0); opacity: 0.18; }
@@ -75,27 +153,122 @@ body {
   100% { transform: scale(1) translateY(0); opacity: 0.18; }
 }
 
-/* --- Particules qui suivent la souris --- */
-.cursor-particle {
-  position: fixed;
+/* Particules type flocon/étoile */
+.particle-flake {
+  position: absolute;
+  color: #fff;
+  font-size: 1.2rem;
+  opacity: 0.22;
   pointer-events: none;
-  border-radius: 50%;
-  background: #7f5fff;
-  width: 10px;
-  height: 10px;
-  opacity: 0.18;
-  z-index: 9999;
-  transition: opacity 0.3s;
-  filter: blur(1.5px);
+  filter: blur(0.5px) drop-shadow(0 0 6px #fff8);
+  animation: flakeAnim 2.5s linear infinite;
+}
+@keyframes flakeAnim {
+  0% { opacity: 0.22; transform: scale(1) translateY(0); }
+  50% { opacity: 0.32; transform: scale(1.2) translateY(-8px); }
+  100% { opacity: 0.22; transform: scale(1) translateY(0); }
 }
 
-/* --- Responsive --- */
+/* Bouton volume custom */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 0 0;
+}
+.volume-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #fff;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #fff2;
+  transition: background 0.2s, color 0.2s;
+}
+.volume-btn:hover {
+  background: #111;
+  color: #fff;
+}
+.volume-slider {
+  width: 120px;
+  accent-color: #fff;
+  background: #fff;
+  border-radius: 4px;
+  height: 6px;
+}
+
+/* Colonne Discord info */
+.discord-info-col {
+  background: #fff;
+  color: #111;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #fff2;
+  padding: 18px 22px;
+  min-width: 220px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-left: 32px;
+}
+.discord-info-col .profile-pic-discord {
+  width: 64px;
+  height: 64px;
+  box-shadow: 0 2px 8px #1112;
+}
+.discord-info-col .username-discord {
+  color: #111;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.discord-info-col .status-discord {
+  background: #111;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+.discord-info-col .badge {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #eee;
+  margin: 0 2px;
+  box-shadow: 0 1px 4px #1112;
+}
+
+@media (max-width: 900px) {
+  .discord-info-col {
+    margin-left: 0;
+    margin-top: 24px;
+  }
+}
 @media (max-width: 600px) {
-  .profile-card, .discord-card, .music-card {
+  .profile-card {
     padding: 18px 4vw;
+    min-width: unset;
     max-width: 99vw;
   }
-  .icon-btn {
-    width: 38px; height: 38px; font-size: 1.2rem;
+  .profile-pic-discord {
+    width: 64px;
+    height: 64px;
+  }
+  .spotify-cover {
+    width: 36px;
+    height: 36px;
+  }
+  .discord-info-col {
+    padding: 10px 6vw;
+    min-width: unset;
+    max-width: 99vw;
   }
 } 

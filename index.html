@@ -7,20 +7,38 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="profile-card">
-    <img src="" alt="Photo de profil Discord" class="profile-pic-discord">
-    <h1 class="username-discord"></h1>
-    <span class="status-discord"></span>
-    <span class="activity-discord"></span>
-    <div class="spotify-info" style="display:none;">
-      <img src="" alt="Spotify cover" class="spotify-cover">
-      <div>
-        <span class="spotify-title"></span>
-        <span class="spotify-artist"></span>
+  <div style="display:flex;align-items:flex-start;justify-content:center;width:100vw;max-width:100vw;">
+    <div class="profile-card" id="main-card">
+      <div class="volume-control">
+        <button class="volume-btn" id="volume-btn">
+          <span class="volume-icon"></span>
+        </button>
+        <input type="range" min="0" max="1" step="0.01" value="1" class="volume-slider" id="volume-slider">
+      </div>
+      <img src="" alt="Photo de profil Discord" class="profile-pic-discord">
+      <h1 class="username-discord"></h1>
+      <span class="status-discord"></span>
+      <span class="activity-discord"></span>
+      <div class="spotify-info" style="display:none;">
+        <img src="" alt="Spotify cover" class="spotify-cover">
+        <div>
+          <span class="spotify-title"></span>
+          <span class="spotify-artist"></span>
+        </div>
+      </div>
+      <div class="social-logos">
+        <button class="social-btn social-globe" title="Site Web"><span class="logo-globe"></span></button>
+        <button class="social-btn social-discord" title="Discord"><span class="logo-discord"></span></button>
+        <button class="social-btn social-spotify" title="Spotify"><span class="logo-spotify"></span></button>
+        <button class="social-btn social-web" title="Portfolio"><span class="logo-web"></span></button>
       </div>
     </div>
-    <div class="social-logos">
-      <!-- Logos CSS ici -->
+    <div class="discord-info-col">
+      <img src="" alt="Photo de profil Discord" class="profile-pic-discord">
+      <span class="username-discord"></span>
+      <span class="status-discord"></span>
+      <div class="badges"></div>
+      <span class="activity-discord"></span>
     </div>
   </div>
   <div id="cursor-particles"></div>
