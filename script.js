@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   // (prev/next inutiles ici mais prêts pour plusieurs musiques)
 
-  // Discord RPC (structure prête)
+  // Discord RPC
   const DISCORD_ID = '1283319101095153705';
   async function updateDiscordCard() {
     const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
