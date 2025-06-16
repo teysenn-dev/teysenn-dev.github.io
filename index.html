@@ -7,61 +7,23 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="background"></div>
-  <div id="volume-control" class="volume-control">
-    <button id="volume-btn"><img src="assets/volume.svg" alt="Volume"></button>
-    <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
-  </div>
-  <div class="profile-stack">
-    <div class="profile-card" id="main-card">
-      <div class="profile-header">
-        <img src="assets/profile.jpg" alt="Photo de profil" class="profile-pic">
-        <div class="profile-info">
-          <h1 class="username">TonPseudo <span class="profile-badges"><img src="assets/badge1.svg"><img src="assets/badge2.svg"></span></h1>
-          <p class="description">Bienvenue sur ma vitrine !</p>
-        </div>
-        <div class="profile-location">
-          <img src="assets/location.svg" alt="Location" class="location-icon">
-          <span class="location-text">France</span>
-        </div>
-      </div>
-      <div class="social-icons">
-        <button class="icon-btn icon-globe" title="Site Web"></button>
-        <button class="icon-btn icon-discord" title="Discord"></button>
-        <button class="icon-btn icon-spotify" title="Spotify"></button>
-        <button class="icon-btn icon-web" title="Portfolio"></button>
-      </div>
-      <div class="stats">
-        <span>👁️ <span id="view-counter">0</span></span>
+  <div class="profile-card">
+    <img src="" alt="Photo de profil Discord" class="profile-pic-discord">
+    <h1 class="username-discord"></h1>
+    <span class="status-discord"></span>
+    <span class="activity-discord"></span>
+    <div class="spotify-info" style="display:none;">
+      <img src="" alt="Spotify cover" class="spotify-cover">
+      <div>
+        <span class="spotify-title"></span>
+        <span class="spotify-artist"></span>
       </div>
     </div>
-    <div class="discord-card">
-      <img src="assets/profile.jpg" alt="Discord avatar" class="discord-avatar">
-      <div class="discord-info">
-        <span class="discord-username">TonDiscord <img src="assets/discord-badge.svg" class="discord-badge"></span>
-        <span class="discord-status">En ligne</span>
-        <span class="discord-activity">Visual Studio Code - Editing index.html</span>
-      </div>
-    </div>
-    <div class="music-card">
-      <img src="assets/music-cover.jpg" alt="Music cover" class="music-cover">
-      <div class="music-info">
-        <span class="music-title">Titre de la musique</span>
-        <span class="music-artist">Artiste</span>
-        <div class="music-progress-container">
-          <span class="music-current-time">0:00</span>
-          <input type="range" id="music-progress" min="0" max="100" value="0">
-          <span class="music-duration">3:54</span>
-        </div>
-        <div class="music-controls">
-          <button id="music-prev" class="music-btn"><img src="assets/prev.svg"></button>
-          <button id="music-play" class="music-btn"><img src="assets/play.svg"></button>
-          <button id="music-next" class="music-btn"><img src="assets/next.svg"></button>
-        </div>
-      </div>
+    <div class="social-logos">
+      <!-- Logos CSS ici -->
     </div>
   </div>
-  <audio id="profile-audio" src="assets/music.mp3" autoplay loop></audio>
+  <div id="cursor-particles"></div>
   <script src="script.js"></script>
 </body>
 </html> 
