@@ -17,60 +17,127 @@ body {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(24, 24, 28, 0.85);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
-  padding: 40px 32px;
+  background: rgba(30, 30, 40, 0.45);
+  border-radius: 32px;
+  box-shadow: 0 8px 32px 0 rgba(108,71,255,0.25), 0 1.5px 16px 0 rgba(0,0,0,0.25);
+  padding: 48px 36px 32px 36px;
   text-align: center;
   z-index: 1;
   min-width: 340px;
   max-width: 90vw;
+  backdrop-filter: blur(18px) saturate(1.2);
+  border: 2.5px solid rgba(108,71,255,0.25);
+  box-sizing: border-box;
+  transition: box-shadow 0.4s, border 0.4s, transform 0.3s;
+  animation: cardIn 1s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes cardIn {
+  0% { opacity: 0; transform: translate(-50%, -60%) scale(0.95); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.profile-card:hover {
+  box-shadow: 0 12px 48px 0 rgba(108,71,255,0.35), 0 2px 24px 0 rgba(0,0,0,0.30);
+  border: 2.5px solid #6c47ff;
+  transform: translate(-50%, -50%) scale(1.025);
 }
 .profile-pic {
-  width: 110px;
-  height: 110px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 4px solid #6c47ff;
   margin-bottom: 18px;
   object-fit: cover;
-  box-shadow: 0 4px 16px rgba(108,71,255,0.25);
-  transition: transform 0.3s;
+  box-shadow: 0 4px 24px rgba(108,71,255,0.25);
+  transition: transform 0.3s, box-shadow 0.3s;
+  animation: fadeIn 1.2s 0.2s backwards;
 }
 .profile-pic:hover {
-  transform: scale(1.07) rotate(-2deg);
+  transform: scale(1.09) rotate(-2deg);
+  box-shadow: 0 8px 32px rgba(108,71,255,0.35);
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
 }
 .username {
   color: #fff;
-  font-size: 2.1rem;
+  font-size: 2.2rem;
   margin: 0 0 8px 0;
   letter-spacing: 1px;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(108,71,255,0.10);
+  animation: fadeIn 1.2s 0.35s backwards;
 }
 .description {
-  color: #bdbdbd;
-  font-size: 1.1rem;
-  margin-bottom: 18px;
+  color: #e0e0e0;
+  font-size: 1.13rem;
+  margin-bottom: 20px;
+  animation: fadeIn 1.2s 0.5s backwards;
 }
 .social-icons {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  margin-bottom: 18px;
+  gap: 22px;
+  margin-bottom: 22px;
+  animation: fadeIn 1.2s 0.7s backwards;
+}
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(108,71,255,0.10);
+  box-shadow: 0 2px 8px rgba(108,71,255,0.10);
+  width: 48px;
+  height: 48px;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 .icon img {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   filter: grayscale(0.5) brightness(0.9);
   transition: filter 0.2s, transform 0.2s;
 }
+.icon:hover {
+  background: rgba(108,71,255,0.25);
+  box-shadow: 0 0 16px #6c47ff55, 0 2px 8px rgba(108,71,255,0.18);
+  transform: scale(1.13) rotate(-6deg);
+}
 .icon:hover img {
-  filter: grayscale(0) brightness(1.2) drop-shadow(0 0 8px #6c47ff);
-  transform: scale(1.15) rotate(-8deg);
+  filter: grayscale(0) brightness(1.2) drop-shadow(0 0 12px #6c47ff);
+  transform: scale(1.18) rotate(-8deg);
 }
 .stats {
   color: #bdbdbd;
-  font-size: 1rem;
+  font-size: 1.08rem;
   display: flex;
   justify-content: center;
   gap: 18px;
   margin-top: 10px;
+  animation: fadeIn 1.2s 0.9s backwards;
+}
+#view-counter {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 8px #6c47ff55;
+}
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 24px 8vw 18px 8vw;
+    min-width: unset;
+  }
+  .profile-pic {
+    width: 80px;
+    height: 80px;
+  }
+  .icon {
+    width: 38px;
+    height: 38px;
+  }
+  .icon img {
+    width: 22px;
+    height: 22px;
+  }
 } 

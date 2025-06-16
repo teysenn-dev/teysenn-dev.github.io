@@ -17,4 +17,15 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   window.addEventListener('click', playAudio);
   window.addEventListener('touchstart', playAudio);
+
+  // Compteur de vues simple avec LocalStorage
+  const counterKey = 'profile-view-counter';
+  let views = localStorage.getItem(counterKey);
+  if (!views) {
+    views = 1;
+  } else {
+    views = parseInt(views, 10) + 1;
+  }
+  localStorage.setItem(counterKey, views);
+  document.getElementById('view-counter').textContent = views;
 }); 
