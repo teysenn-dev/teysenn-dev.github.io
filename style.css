@@ -164,4 +164,263 @@ body {
     width: 22px;
     height: 22px;
   }
+}
+.volume-control {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background: rgba(30,30,40,0.45);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #6c47ff22;
+  padding: 8px 12px;
+  transition: background 0.2s;
+}
+#volume-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+#volume-btn img {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 6px #a084ff88);
+}
+#volume-slider {
+  width: 80px;
+  margin-left: 10px;
+  accent-color: #a084ff;
+  display: none;
+  transition: opacity 0.3s;
+}
+.volume-control:hover #volume-slider,
+.volume-control:focus-within #volume-slider {
+  display: block;
+}
+#main-card {
+  perspective: 1200px;
+  transition: transform 0.35s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.35s;
+}
+.profile-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-top: 60px;
+  z-index: 2;
+}
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.profile-info {
+  flex: 1;
+  text-align: left;
+}
+.profile-location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  color: #fff;
+  background: rgba(108,71,255,0.13);
+  border-radius: 12px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px #6c47ff22;
+  animation: locationFadeIn 1.2s 0.7s backwards;
+}
+@keyframes locationFadeIn {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.location-icon {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 6px #a084ff88);
+}
+.profile-badges img {
+  height: 28px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.discord-card, .music-card {
+  width: 540px;
+  max-width: 95vw;
+  background: rgba(30, 30, 40, 0.32);
+  border-radius: 28px;
+  box-shadow: 0 0 24px 0 #6c47ff33, 0 2px 12px #6c47ff22;
+  border: 2px solid #6c47ff33;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 28px;
+  margin: 0 auto;
+  position: relative;
+  transition: box-shadow 0.3s, border 0.3s, transform 0.3s;
+}
+.discord-card:hover, .music-card:hover {
+  box-shadow: 0 0 48px 0 #a084ff77, 0 4px 24px #6c47ff33;
+  border: 2px solid #a084ff77;
+  transform: scale(1.025);
+}
+.discord-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2.5px solid #a084ff;
+  object-fit: cover;
+  box-shadow: 0 2px 12px #a084ff55;
+}
+.discord-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.discord-username {
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.discord-badge {
+  height: 20px;
+}
+.discord-status {
+  color: #a084ff;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.discord-activity {
+  color: #bdbdbd;
+  font-size: 0.98rem;
+}
+.music-card {
+  min-height: 90px;
+}
+.music-cover {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 2px 12px #a084ff55;
+}
+.music-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-left: 18px;
+}
+.music-title {
+  color: #fff;
+  font-size: 1.18rem;
+  font-weight: 600;
+}
+.music-artist {
+  color: #a084ff;
+  font-size: 1.05rem;
+}
+.music-progress-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.music-current-time, .music-duration {
+  color: #bdbdbd;
+  font-size: 0.98rem;
+  min-width: 38px;
+  text-align: center;
+}
+#music-progress {
+  flex: 1;
+  accent-color: #a084ff;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #a084ff 0%, #6c47ff 100%);
+}
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+.music-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.music-btn img {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 6px #a084ff88);
+}
+.music-btn:hover {
+  background: rgba(160,132,255,0.18);
+}
+#snowflakes, .snowflake { display: none !important; }
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #e8f1ff;
+  box-shadow: 0 2px 8px #6c47ff11;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin: 0 4px;
+  font-size: 1.7rem;
+  color: #2563eb;
+  position: relative;
+}
+.icon-btn:hover {
+  background: #d0e3ff;
+  box-shadow: 0 4px 16px #6c47ff22;
+  transform: scale(1.08);
+}
+/* Icônes CSS personnalisées */
+.icon-globe::before {
+  content: '\1F310'; /* 🌐 */
+}
+.icon-discord::before {
+  content: '\1F47E'; /* 👾 (à remplacer par un SVG CSS Discord stylisé) */
+}
+.icon-spotify::before {
+  content: '\1F3B5'; /* 🎵 (à remplacer par un SVG CSS Spotify stylisé) */
+}
+.icon-web::before {
+  content: '\1F5A5'; /* 🖥️ (à remplacer par un SVG CSS Web stylisé) */
+}
+@media (max-width: 700px) {
+  .profile-stack, .discord-card, .music-card {
+    width: 98vw !important;
+    max-width: 98vw !important;
+    padding: 10px 2vw !important;
+  }
+  .profile-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .music-cover, .discord-avatar {
+    width: 44px;
+    height: 44px;
+  }
 } 
