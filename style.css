@@ -1,274 +1,497 @@
-/* --- Fond sobre et moderne --- */
+/* Variables globales */
+:root {
+  --primary-color: #fff;
+  --secondary-color: #111;
+  --accent-color: #7f5fff;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --transition-speed: 0.3s;
+}
+
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: url('assets/cursor.png'), auto;
+}
+
 body {
   min-height: 100vh;
   margin: 0;
-  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: #111;
-  color: #fff;
+  font-family: 'Inter', sans-serif;
+  background: var(--secondary-color);
+  color: var(--primary-color);
   overflow-x: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/* --- Cartes principales --- */
-.profile-card, .discord-card, .music-card {
-  background: #181818;
+/* Fond vidéo */
+.video-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.video-background iframe {
+  width: 100vw;
+  height: 56.25vw; /* 16:9 */
+  min-height: 100vh;
+  min-width: 177.77vh; /* 16:9 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Overlay pour assombrir la vidéo */
+.video-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+/* Conteneur principal */
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 32px;
+  padding: 32px;
+  width: 100%;
+  max-width: 1400px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Carte principale */
+.profile-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
   border-radius: 28px;
-  box-shadow: 0 8px 32px 0 #fff2, 0 1.5px 16px 0 #0008;
-  border: none;
-  padding: 36px 32px;
-  min-width: 320px;
-  max-width: 95vw;
-  min-height: 180px;
+  padding: 36px;
+  width: 100%;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 18px;
-  margin: 32px 0;
-  transition: box-shadow 0.4s, transform 0.4s;
-  will-change: transform;
-}
-.profile-card {
-  margin-top: 60px;
-}
-.profile-card.tilt {
-  box-shadow: 0 16px 64px 0 #fff5, 0 2px 24px 0 #000a;
-  transform: scale(1.03) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
-}
-.profile-card:hover, .discord-card:hover, .music-card:hover {
-  box-shadow: 0 12px 48px 0 #7f5fff33, 0 2px 24px 0 #0005;
-}
-
-.profile-pic-discord {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 24px #fff3;
-  background: #222;
-  margin-bottom: 8px;
-}
-
-.username-discord {
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0;
-  color: #fff;
-  letter-spacing: 1px;
-}
-.status-discord {
-  font-size: 1.1rem;
-  color: #222;
-  background: #fff;
-  border-radius: 8px;
-  padding: 2px 10px;
-  margin-bottom: 2px;
-  display: inline-block;
-}
-.activity-discord {
-  font-size: 1rem;
-  color: #bbb;
-  margin-bottom: 8px;
-}
-
-.spotify-info {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: #fff;
-  border-radius: 16px;
-  padding: 10px 18px;
-  box-shadow: 0 2px 12px #fff2;
-  margin-top: 8px;
-  color: #111;
-}
-.spotify-cover {
-  width: 54px;
-  height: 54px;
-  border-radius: 12px;
-  object-fit: cover;
-  box-shadow: 0 2px 8px #fff3;
-}
-.spotify-title {
-  font-weight: 600;
-  color: #111;
-  font-size: 1.1rem;
-}
-.spotify-artist {
-  color: #444;
-  font-size: 1rem;
-  display: block;
-}
-
-.social-logos {
-  display: flex;
-  gap: 18px;
-  margin-top: 10px;
-}
-.social-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: #fff;
-  color: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.7rem;
-  box-shadow: 0 2px 8px #fff2;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  margin: 0 6px;
+  gap: 24px;
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
   position: relative;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
-  z-index: 1;
-}
-.social-btn:hover {
-  background: #111;
-  color: #fff;
-  box-shadow: 0 4px 16px #fff5;
-  transform: scale(1.08);
+  overflow: hidden;
 }
 
-/* Particules autour des boutons */
-.social-btn .btn-particle {
-  position: absolute;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0.18;
-  pointer-events: none;
-  animation: btnParticleAnim 2.2s infinite linear;
-}
-.social-btn .btn-particle1 {
-  width: 8px; height: 8px; left: 6px; top: 6px; animation-delay: 0s; }
-.social-btn .btn-particle2 {
-  width: 5px; height: 5px; right: 8px; top: 10px; animation-delay: 0.7s; }
-.social-btn .btn-particle3 {
-  width: 6px; height: 6px; left: 14px; bottom: 7px; animation-delay: 1.2s; }
-@keyframes btnParticleAnim {
-  0% { transform: scale(1) translateY(0); opacity: 0.18; }
-  50% { transform: scale(1.3) translateY(-4px); opacity: 0.32; }
-  100% { transform: scale(1) translateY(0); opacity: 0.18; }
+.profile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 48px 0 rgba(127, 95, 255, 0.2);
 }
 
-/* Particules type flocon/étoile */
-.particle-flake {
-  position: absolute;
-  color: #fff;
-  font-size: 1.2rem;
-  opacity: 0.22;
-  pointer-events: none;
-  filter: blur(0.5px) drop-shadow(0 0 6px #fff8);
-  animation: flakeAnim 2.5s linear infinite;
-}
-@keyframes flakeAnim {
-  0% { opacity: 0.22; transform: scale(1) translateY(0); }
-  50% { opacity: 0.32; transform: scale(1.2) translateY(-8px); }
-  100% { opacity: 0.22; transform: scale(1) translateY(0); }
-}
-
-/* Bouton volume custom */
+/* Contrôle du volume */
 .volume-control {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 18px 0 0 0;
+  z-index: 10;
 }
+
 .volume-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  color: #111;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  border: none;
-  outline: none;
   cursor: pointer;
-  box-shadow: 0 2px 8px #fff2;
-  transition: background 0.2s, color 0.2s;
-}
-.volume-btn:hover {
-  background: #111;
-  color: #fff;
-}
-.volume-slider {
-  width: 120px;
-  accent-color: #fff;
-  background: #fff;
-  border-radius: 4px;
-  height: 6px;
+  transition: all var(--transition-speed);
 }
 
-/* Colonne Discord info */
+.volume-btn:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+.volume-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--glass-bg);
+  border-radius: 2px;
+  outline: none;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--glass-border);
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Support pour Firefox */
+.volume-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--glass-border);
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Support pour Edge */
+.volume-slider::-ms-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--glass-border);
+}
+
+.volume-slider::-ms-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Photo de profil */
+.profile-pic-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin: 20px 0;
+}
+
+.profile-pic-discord {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform var(--transition-speed);
+}
+
+.profile-pic-discord:hover {
+  transform: scale(1.05);
+}
+
+/* Pseudo avec effet sparkle */
+.username-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.sparkle-effect {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  pointer-events: none;
+  animation: spin 2.8s linear infinite;
+}
+
+.username-discord {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 2;
+}
+
+/* Statut et activité */
+.status-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-discord {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  background: var(--glass-bg);
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.activity-discord {
+  font-size: 1rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
+/* Lecteur Spotify */
+.spotify-info {
+  width: 100%;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.spotify-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.spotify-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.spotify-title {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.spotify-artist {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
+.spotify-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.spotify-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.spotify-btn:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+.spotify-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Logos sociaux */
+.social-logos {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.social-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.social-btn:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.logo-svg {
+  width: 24px;
+  height: 24px;
+  transition: transform var(--transition-speed);
+}
+
+/* Compteur de vues */
+.view-counter {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary-color);
+}
+
+#view-count {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Colonne Discord */
 .discord-info-col {
-  background: #fff;
-  color: #111;
-  border-radius: 18px;
-  box-shadow: 0 2px 12px #fff2;
-  padding: 18px 22px;
-  min-width: 220px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 24px;
+  width: 100%;
   max-width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-left: 32px;
-}
-.discord-info-col .profile-pic-discord {
-  width: 64px;
-  height: 64px;
-  box-shadow: 0 2px 8px #1112;
-}
-.discord-info-col .username-discord {
-  color: #111;
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-.discord-info-col .status-discord {
-  background: #111;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 6px;
-  padding: 2px 8px;
-}
-.discord-info-col .badge {
-  display: inline-block;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: #eee;
-  margin: 0 2px;
-  box-shadow: 0 1px 4px #1112;
+  gap: 16px;
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition-speed);
 }
 
-@media (max-width: 900px) {
+.discord-info-col:hover {
+  transform: translateY(-5px);
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Particules */
+#particles-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .discord-info-col {
-    margin-left: 0;
-    margin-top: 24px;
+    max-width: 480px;
   }
 }
+
 @media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+
   .profile-card {
-    padding: 18px 4vw;
-    min-width: unset;
-    max-width: 99vw;
+    padding: 24px;
   }
-  .profile-pic-discord {
-    width: 64px;
-    height: 64px;
+
+  .username-discord {
+    font-size: 2rem;
   }
-  .spotify-cover {
-    width: 36px;
-    height: 36px;
+
+  .social-logos {
+    gap: 12px;
   }
-  .discord-info-col {
-    padding: 10px 6vw;
-    min-width: unset;
-    max-width: 99vw;
+
+  .social-btn {
+    width: 40px;
+    height: 40px;
   }
+}
+
+/* Effet de scanlines */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.15;
 } 
