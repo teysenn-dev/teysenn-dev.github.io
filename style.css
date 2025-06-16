@@ -3,7 +3,7 @@ body {
   padding: 0;
   min-height: 100vh;
   font-family: 'Segoe UI', Arial, sans-serif;
-  background: #18181c;
+  background: linear-gradient(120deg, #181a20 0%, #23243a 100%);
   overflow: hidden;
 }
 .background {
@@ -17,20 +17,16 @@ body {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(30, 30, 40, 0.32);
+  background: linear-gradient(120deg, rgba(60,40,120,0.85) 0%, rgba(40,60,120,0.85) 100%);
   border-radius: 36px;
-  box-shadow:
-    0 0 32px 0 #6c47ff55,
-    0 8px 32px 0 rgba(108,71,255,0.18),
-    0 1.5px 16px 0 rgba(0,0,0,0.25);
+  box-shadow: 0 8px 32px 0 #7f5fff33, 0 1.5px 16px 0 #0002;
   padding: 54px 40px 36px 40px;
   text-align: center;
   z-index: 1;
   min-width: 340px;
   max-width: 90vw;
   backdrop-filter: blur(24px) saturate(1.3);
-  border: 3px solid;
-  border-image: linear-gradient(120deg, #6c47ff 0%, #a084ff 100%) 1;
+  border: 2.5px solid #7f5fff44;
   box-sizing: border-box;
   transition: box-shadow 0.5s cubic-bezier(.68,-0.55,.27,1.55), border 0.5s, transform 0.4s cubic-bezier(.68,-0.55,.27,1.55);
   animation: cardInSlide 1.1s cubic-bezier(.68,-0.55,.27,1.55);
@@ -254,10 +250,10 @@ body {
 .discord-card, .music-card {
   width: 540px;
   max-width: 95vw;
-  background: rgba(30, 30, 40, 0.32);
-  border-radius: 28px;
-  box-shadow: 0 0 24px 0 #6c47ff33, 0 2px 12px #6c47ff22;
-  border: 2px solid #6c47ff33;
+  background: linear-gradient(120deg, rgba(60,40,120,0.85) 0%, rgba(40,60,120,0.85) 100%);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 #7f5fff33, 0 1.5px 16px 0 #0002;
+  border: 2.5px solid #7f5fff44;
   display: flex;
   align-items: center;
   gap: 18px;
@@ -379,35 +375,47 @@ body {
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: 16px;
-  background: #e8f1ff;
-  box-shadow: 0 2px 8px #6c47ff11;
+  border-radius: 14px;
+  background: #23243a;
+  box-shadow: 0 2px 8px #7f5fff11;
   transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
   cursor: pointer;
   border: none;
   outline: none;
   margin: 0 4px;
   font-size: 1.7rem;
-  color: #2563eb;
+  color: #7f5fff;
   position: relative;
 }
 .icon-btn:hover {
-  background: #d0e3ff;
-  box-shadow: 0 4px 16px #6c47ff22;
-  transform: scale(1.08);
+  background: #7f5fff22;
+  color: #a084ff;
+  box-shadow: 0 4px 16px #7f5fff33;
 }
-/* Icônes CSS personnalisées */
+/* SVG/CSS logos sobres */
 .icon-globe::before {
-  content: '\1F310'; /* 🌐 */
+  content: '';
+  display: block;
+  width: 28px; height: 28px;
+  background: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%237f5fff" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="10" ry="4"/><path d="M2 12h20"/><path d="M12 2a15 15 0 010 20"/><path d="M12 2a15 15 0 000 20"/></svg>') center/contain no-repeat;
 }
 .icon-discord::before {
-  content: '\1F47E'; /* 👾 (à remplacer par un SVG CSS Discord stylisé) */
+  content: '';
+  display: block;
+  width: 28px; height: 28px;
+  background: url('data:image/svg+xml;utf8,<svg fill="%237f5fff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.369A19.791 19.791 0 0016.885 3.1a.074.074 0 00-.079.037c-.34.607-.719 1.396-.984 2.01a18.524 18.524 0 00-5.59 0 12.51 12.51 0 00-.995-2.01.077.077 0 00-.079-.037c-1.432.327-2.814.812-4.105 1.47a.069.069 0 00-.032.027C.533 9.045-.32 13.579.099 18.057a.08.08 0 00.031.056c1.726 1.27 3.405 2.048 5.045 2.56a.077.077 0 00.084-.027c.388-.53.734-1.09 1.032-1.677a.076.076 0 00-.041-.104c-.552-.21-1.077-.465-1.584-.765a.077.077 0 01-.008-.127c.106-.08.213-.163.316-.246a.074.074 0 01.077-.01c3.33 1.52 6.94 1.52 10.24 0a.073.073 0 01.078.009c.104.083.21.166.317.246a.077.077 0 01-.006.127c-.507.3-1.032.555-1.584.765a.076.076 0 00-.04.105c.3.586.646 1.146 1.032 1.676a.076.076 0 00.084.028c1.64-.512 3.319-1.29 5.045-2.56a.077.077 0 00.03-.055c.417-4.478-.36-9.012-2.917-13.661a.061.061 0 00-.031-.028zM8.02 15.331c-1.006 0-1.823-.92-1.823-2.051 0-1.13.807-2.05 1.823-2.05 1.017 0 1.824.92 1.824 2.05 0 1.13-.807 2.05-1.824 2.05zm7.96 0c-1.006 0-1.823-.92-1.823-2.051 0-1.13.807-2.05 1.823-2.05 1.017 0 1.824.92 1.824 2.05 0 1.13-.807 2.05-1.824 2.05z"/></svg>') center/contain no-repeat;
 }
 .icon-spotify::before {
-  content: '\1F3B5'; /* 🎵 (à remplacer par un SVG CSS Spotify stylisé) */
+  content: '';
+  display: block;
+  width: 28px; height: 28px;
+  background: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%237f5fff" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"/><path d="M8 15c2.5-1 5.5-1 8 0"/><path d="M9 12c2-1 4-1 6 0"/><path d="M10 9c1.5-.5 3-.5 4.5 0"/></svg>') center/contain no-repeat;
 }
 .icon-web::before {
-  content: '\1F5A5'; /* 🖥️ (à remplacer par un SVG CSS Web stylisé) */
+  content: '';
+  display: block;
+  width: 28px; height: 28px;
+  background: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%237f5fff" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 8h8v8H8z"/></svg>') center/contain no-repeat;
 }
 @media (max-width: 700px) {
   .profile-stack, .discord-card, .music-card {

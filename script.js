@@ -104,12 +104,29 @@ window.addEventListener('DOMContentLoaded', () => {
   // (prev/next inutiles ici mais prêts pour plusieurs musiques)
 
   // Discord RPC (structure prête)
-  async function fetchDiscordActivity() {
-    // À compléter avec une vraie API (Lanyard, Vercel, etc.)
-    // Exemple :
-    // const res = await fetch('https://api.lanyard.rest/v1/users/TON_ID');
-    // const data = await res.json();
-    // ...
+  const DISCORD_ID = '1283319101095153705';
+  async function updateDiscordCard() {
+    const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+    const data = await res.json();
+    if (!data.success) return;
+    const d = data.data;
+    // Discord
+    document.querySelector('.discord-avatar').src = `https://cdn.discordapp.com/avatars/${d.discord_user.id}/${d.discord_user.avatar}.png?size=128`;
+    document.querySelector('.discord-username').textContent = d.discord_user.username;
+    document.querySelector('.discord-status').textContent = d.discord_status === 'online' ? 'En ligne' : d.discord_status;
+    // Activité
+    let act = d.activities.find(a => a.type === 0);
+    document.querySelector('.discord-activity').textContent = act ? act.name + (act.state ? ' - ' + act.state : '') : '';
+    // Spotify
+    if (d.listening_to_spotify && d.spotify) {
+      document.querySelector('.music-cover').src = d.spotify.album_art_url;
+      document.querySelector('.music-title').textContent = d.spotify.song;
+      document.querySelector('.music-artist').textContent = d.spotify.artist;
+      document.querySelector('.music-card').style.display = '';
+    } else {
+      document.querySelector('.music-card').style.display = 'none';
+    }
   }
-  // fetchDiscordActivity();
+  updateDiscordCard();
+  setInterval(updateDiscordCard, 10000);
 }); 
