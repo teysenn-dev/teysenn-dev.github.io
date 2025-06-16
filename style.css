@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #18181c;
+  overflow: hidden;
+}
+.background {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('assets/background.jpg') center/cover no-repeat;
+  filter: blur(8px) brightness(0.5);
+  z-index: 0;
+}
+.profile-card {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(24, 24, 28, 0.85);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  padding: 40px 32px;
+  text-align: center;
+  z-index: 1;
+  min-width: 340px;
+  max-width: 90vw;
+}
+.profile-pic {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 4px solid #6c47ff;
+  margin-bottom: 18px;
+  object-fit: cover;
+  box-shadow: 0 4px 16px rgba(108,71,255,0.25);
+  transition: transform 0.3s;
+}
+.profile-pic:hover {
+  transform: scale(1.07) rotate(-2deg);
+}
+.username {
+  color: #fff;
+  font-size: 2.1rem;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+.description {
+  color: #bdbdbd;
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+.icon img {
+  width: 32px;
+  height: 32px;
+  filter: grayscale(0.5) brightness(0.9);
+  transition: filter 0.2s, transform 0.2s;
+}
+.icon:hover img {
+  filter: grayscale(0) brightness(1.2) drop-shadow(0 0 8px #6c47ff);
+  transform: scale(1.15) rotate(-8deg);
+}
+.stats {
+  color: #bdbdbd;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 10px;
+} 
