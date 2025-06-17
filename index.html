@@ -3,29 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teysenn</title>
+  <title>@Teysenn</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="assets/logos/icon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <audio id="bg-music" src="assets/musiques/hdmi by BONES.mp3" autoplay loop hidden></audio>
-  <img id="bg-gif" src="assets/background/bg.gif" style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;">
+  <img id="bg-gif" src="assets/background/output-onlinegiftools.gif" style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;">
   <div class="scanlines"></div>
   <canvas id="bg-canvas"></canvas>
   <main>
     <div class="profile-card" id="profile-card">
-      <img src="assets/pfp/pfp2.gif" alt="avatar" class="avatar" />
+      <div class="banner">
+        <img src="assets/banner/Test_1.jpg" alt="banner" class="banner-img" />
+        <img src="assets/pfp/pfp2.gif" alt="avatar" class="avatar" />
+      </div>
       <h1 class="username" id="username">Teysenn</h1>
       <canvas id="orbit-canvas" width="220" height="80" style="position:absolute; left:50%; transform:translateX(-50%); pointer-events:none; z-index:3;"></canvas>
-      <p class="desc">Passionné d'informatique</p>
-      <p>Site encore en développement</p>
+      
+      <div class="badges">
+        <span class="badge"><i class="fab fa-html5"></i> HTML</span>
+        <span class="badge"><i class="fab fa-css3-alt"></i> CSS</span>
+        <span class="badge"><i class="fab fa-python"></i> Python</span>
+        <span class="badge"><i class="fab fa-js"></i> JavaScript</span>
+        <span class="badge"><i class="fas fa-code"></i> C</span>
+        <span class="badge"><i class="fab fa-cuttlefish"></i> C++</span>
+        <span class="badge"><i class="fab fa-microsoft"></i> C#</span>
+        <span class="badge"><i class="fas fa-database"></i> SQL</span>
+      </div>
+
+      <div class="animated-descriptions">
+        <span class="typing-text"></span>
+      </div>
+
+      <div class="location">
+        <div class="location-dot"></div>
+        <span>France</span>
+      </div>
+
       <div class="socials">
         <a href="https://thib-mri.github.io"><img src="assets/logos/pf.png" alt="Portfolio"></a>
-        <a href="#"><img src="assets/logos/discord.png" alt="Discord"></a>
-        <a href="#"><img src="assets/logos/github.png" alt="GitHub"></a>
+        <a href="https://discordapp.com/users/1283319101095153705"><img src="assets/logos/discord.png" alt="Discord"></a>
+        <a href="https://github.com/teysenn-dev"><img src="assets/logos/github.png" alt="GitHub"></a>
+        <a href="https://www.tiktok.com/@teysennxi?_t=ZN-8xHXaB78rOY&_r=1"><img src="assets/logos/tiktok.png" alt="TikTok"></a>
       </div>
     </div>
-    <div class="typewriter" id="typewriter"></div>
   </main>
   <script src="script.js"></script>
 </body>

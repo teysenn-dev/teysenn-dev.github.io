@@ -70,21 +70,17 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  background: rgba(18, 22, 34, 0.45);
-  border-radius: 28px;
-  box-shadow: 
-    0 8px 48px 0 rgba(30, 60, 120, 0.25),
-    0 1.5px 8px 0 rgba(0,0,0,0.18),
-    0 0 0 1px rgba(255, 255, 255, 0.1),
-    inset 0 0 32px rgba(255, 255, 255, 0.05);
-  padding: 40px 32px 32px 32px;
-  backdrop-filter: blur(24px) saturate(1.5);
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  gap: 12px;
   will-change: transform;
   transition: 700ms cubic-bezier(0.03, 0.98, 0.52, 0.99);
   transform: translate(-50%, -50%) perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+  background: none !important;
+  backdrop-filter: none !important;
+  border: none;
+  box-shadow: none;
+  overflow: visible;
   z-index: 2;
+  padding: 0 15px;
   animation: glow 8s ease-in-out infinite alternate;
 }
 
@@ -106,26 +102,49 @@ main {
 }
 .profile-card:hover {
   box-shadow: 0 12px 48px 0 #fff2;
+  transform: translate(-50%, -50%) perspective(1000px) rotateX(6deg) rotateY(-6deg) scale3d(1.03, 1.03, 1.03);
+}
+.banner {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 1;
 }
 .avatar {
-  width: 96px;
-  height: 96px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  border: 2.5px solid transparent;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  z-index: 2;
+  position: absolute;
+  left: 50%;
+  bottom: -60px;
+  transform: translateX(-50%);
   background: #222;
 }
 .username {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--white);
+  margin-top: 65px;
+  color: white;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
   text-shadow:
-    0 2px 24px #fff,
-    0 0 48px #fff8,
-    0 0 80px #fff6,
-    0 0 120px #fff3;
-  letter-spacing: 1px;
-  position: relative;
-  z-index: 4;
+    0 0 8px #fff,
+    0 0 16px #a7bfff,
+    0 2px 4px rgba(0, 0, 0, 0.3);
 }
 .desc {
   color: var(--gray);
@@ -134,15 +153,16 @@ main {
   margin-bottom: 8px;
 }
 .socials {
+  margin-top: 10px;
+  gap: 40px;
   display: flex;
-  gap: 52px;
-  margin-top: 12px;
   align-items: center;
   justify-content: center;
 }
 .socials img {
   width: 38px;
   height: 38px;
+  border-radius: 19%;
   filter: drop-shadow(0 0 10px #fff8);
   transition: transform 0.2s, filter 0.2s;
   opacity: 0.9;
@@ -168,6 +188,85 @@ main {
   pointer-events: none;
   z-index: 3;
 }
+.badges {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+  max-width: 380px;
+}
+.badge {
+  background: rgba(15, 15, 15, 0.65);
+  padding: 6px 12px;
+  border-radius: 15px;
+  color: white;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.badge:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.badge i {
+  font-size: 16px;
+}
+.fa-html5 { color: #E34F26; }
+.fa-css3-alt { color: #1572B6; }
+.fa-python { color: #3776AB; }
+.fa-js { color: #F7DF1E; }
+.animated-descriptions {
+  margin: 8px 0;
+  height: 24px;
+}
+.typing-text {
+  display: inline-block;
+  position: relative;
+  min-width: 10px;
+}
+.typing-text::after {
+  content: '|';
+  position: absolute;
+  right: -8px;
+  animation: blink 0.7s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.location {
+  margin: 10px 0;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: white;
+}
+.location-dot {
+  width: 8px;
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
 @media (max-width: 600px) {
   .profile-card {
     padding: 24px 8px;
@@ -182,4 +281,10 @@ main {
   .typewriter {
     font-size: 1rem;
   }
-} 
+}
+
+/* Couleurs spécifiques pour chaque langage */
+.badge i.fa-code { color: #555555; }         /* C - Gris */
+.badge i.fa-cuttlefish { color: #00599C; }   /* C++ - Bleu */
+.badge i.fa-microsoft { color: #68217A; }     /* C# - Violet */
+.badge i.fa-database { color: #00758F; }      /* SQL - Bleu marine */ 

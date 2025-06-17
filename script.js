@@ -68,45 +68,6 @@ function drawParticles() {
 }
 drawParticles();
 
-// --- Effet typewriter ---
-const typewriter = document.getElementById('typewriter');
-const text = "Bienvenue sur mon profil guns.lol !";
-let i = 0;
-function type() {
-  if (i <= text.length) {
-    typewriter.textContent = text.slice(0, i);
-    i++;
-    setTimeout(type, 60);
-  }
-}
-type();
-
-// --- EFFET TYPEWRITER SUR LE TITRE DE L'ONGLET ---
-const pageTitle = 'Teysenn';
-let tIndex = 0;
-let tDir = 1;
-function typeTitle() {
-  document.title = tIndex === 0 ? pageTitle : pageTitle.slice(0, tIndex);
-  if (tDir === 1) {
-    if (tIndex < pageTitle.length) {
-      tIndex++;
-      setTimeout(typeTitle, 120);
-    } else {
-      tDir = -1;
-      setTimeout(typeTitle, 900);
-    }
-  } else {
-    if (tIndex > 0) {
-      tIndex--;
-      setTimeout(typeTitle, 60);
-    } else {
-      tDir = 1;
-      setTimeout(typeTitle, 500);
-    }
-  }
-}
-typeTitle();
-
 // --- Carte 3D tilt ---
 const card = document.getElementById('profile-card');
 card.addEventListener('mousemove', e => {
@@ -119,18 +80,66 @@ card.addEventListener('mouseleave', () => {
   card.style.transform = 'translate(-50%, -50%) perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)';
 });
 
-// --- Lancement musique de fond même si autoplay est bloqué ---
+// --- Animation de la description ---
+const descriptions = [
+  "Developpeur, Sécurité & Réseaux",
+  "COD Player",
+  "Linux enjoyer"
+];
+
+let typingElement = null;
+let currentDescIndex = 0;
+let currentCharIndex = 0;
+let isDeleting = false;
+
+function typeText() {
+  if (!typingElement) return;
+  
+  const currentDesc = descriptions[currentDescIndex];
+  
+  if (isDeleting) {
+    typingElement.textContent = currentDesc.substring(0, currentCharIndex - 1);
+    currentCharIndex--;
+  } else {
+    typingElement.textContent = currentDesc.substring(0, currentCharIndex + 1);
+    currentCharIndex++;
+  }
+
+  if (!isDeleting && currentCharIndex === currentDesc.length) {
+    isDeleting = true;
+    setTimeout(typeText, 2000);
+    return;
+  }
+
+  if (isDeleting && currentCharIndex === 0) {
+    isDeleting = false;
+    currentDescIndex = (currentDescIndex + 1) % descriptions.length;
+    setTimeout(typeText, 500);
+    return;
+  }
+
+  const typingSpeed = isDeleting ? 50 : 100;
+  setTimeout(typeText, typingSpeed);
+}
+
+// --- Initialisation après chargement du DOM ---
 window.addEventListener('DOMContentLoaded', () => {
+  // Initialisation de l'audio
   const audio = document.getElementById('bg-music');
-  if (!audio) return;
-  // Tentative de lecture immédiate
-  audio.play().catch(() => {});
-  // Si bloqué, relancer au premier clic/tap
-  const resumeAudio = () => {
-    audio.play();
-    window.removeEventListener('click', resumeAudio);
-    window.removeEventListener('touchstart', resumeAudio);
-  };
-  window.addEventListener('click', resumeAudio);
-  window.addEventListener('touchstart', resumeAudio);
+  if (audio) {
+    audio.play().catch(() => {});
+    const resumeAudio = () => {
+      audio.play();
+      window.removeEventListener('click', resumeAudio);
+      window.removeEventListener('touchstart', resumeAudio);
+    };
+    window.addEventListener('click', resumeAudio);
+    window.addEventListener('touchstart', resumeAudio);
+  }
+
+  // Initialisation de l'animation de description
+  typingElement = document.querySelector('.typing-text');
+  if (typingElement) {
+    typeText();
+  }
 });
