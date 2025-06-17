@@ -82,8 +82,8 @@ card.addEventListener('mouseleave', () => {
 
 // --- Animation de la description ---
 const descriptions = [
-  "Developpeur, Sécurité & Réseaux",
-  "COD Player",
+  "Développeur, Sécurité & Réseaux",
+  "Joueur Call Of Duty",
   "Linux enjoyer"
 ];
 
