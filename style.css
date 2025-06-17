@@ -1,0 +1,185 @@
+:root {
+  --containerWidth: 420px;
+  --main-bg: #101014;
+  --card-bg: rgba(20,20,20,0.92);
+  --white: #fff;
+  --gray: #eaeaea;
+  --border: rgba(255,255,255,0.08);
+  --shadow: 0 8px 32px 0 rgba(0,0,0,0.25);
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  width: 100vw;
+  background: var(--main-bg);
+  color: var(--white);
+  font-family: 'Inter', 'Fira Mono', 'Consolas', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+main {
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 2px,
+    rgba(255,255,255,0.06) 3px, transparent 4px
+  );
+  z-index: 1;
+  opacity: 0.18;
+}
+#bg-canvas {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+#cat {
+  position: fixed;
+  left: 100px;
+  top: 100px;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 0 8px #fff8);
+  transition: filter 0.2s;
+}
+.profile-card {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: var(--containerWidth);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: rgba(18, 22, 34, 0.45);
+  border-radius: 28px;
+  box-shadow: 
+    0 8px 48px 0 rgba(30, 60, 120, 0.25),
+    0 1.5px 8px 0 rgba(0,0,0,0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 0 32px rgba(255, 255, 255, 0.05);
+  padding: 40px 32px 32px 32px;
+  backdrop-filter: blur(24px) saturate(1.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  will-change: transform;
+  transition: 700ms cubic-bezier(0.03, 0.98, 0.52, 0.99);
+  transform: translate(-50%, -50%) perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+  z-index: 2;
+  animation: glow 8s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 
+      0 8px 48px 0 rgba(30, 60, 120, 0.25),
+      0 1.5px 8px 0 rgba(0,0,0,0.18),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      inset 0 0 32px rgba(255, 255, 255, 0.05);
+  }
+  100% {
+    box-shadow: 
+      0 8px 48px 0 rgba(30, 60, 120, 0.35),
+      0 1.5px 8px 0 rgba(0,0,0,0.18),
+      0 0 0 1px rgba(255, 255, 255, 0.15),
+      inset 0 0 48px rgba(255, 255, 255, 0.08);
+  }
+}
+.profile-card:hover {
+  box-shadow: 0 12px 48px 0 #fff2;
+}
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  background: #222;
+}
+.username {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--white);
+  text-shadow:
+    0 2px 24px #fff,
+    0 0 48px #fff8,
+    0 0 80px #fff6,
+    0 0 120px #fff3;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 4;
+}
+.desc {
+  color: var(--gray);
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.socials {
+  display: flex;
+  gap: 52px;
+  margin-top: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.socials img {
+  width: 38px;
+  height: 38px;
+  filter: drop-shadow(0 0 10px #fff8);
+  transition: transform 0.2s, filter 0.2s;
+  opacity: 0.9;
+}
+.socials img:hover {
+  transform: scale(1.15) rotate(-4deg);
+  filter: drop-shadow(0 0 20px #fff) drop-shadow(0 0 10px #fff);
+  opacity: 1;
+}
+.typewriter {
+  margin-top: 32px;
+  font-size: 1.3rem;
+  color: var(--white);
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  text-shadow: 0 2px 8px #fff2;
+  min-height: 2.2em;
+}
+#orbit-canvas {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 3;
+}
+@media (max-width: 600px) {
+  .profile-card {
+    padding: 24px 8px;
+  }
+  .avatar {
+    width: 72px;
+    height: 72px;
+  }
+  .username {
+    font-size: 1.3rem;
+  }
+  .typewriter {
+    font-size: 1rem;
+  }
+} 
