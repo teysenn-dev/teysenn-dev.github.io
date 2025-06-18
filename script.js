@@ -1,6 +1,88 @@
+// --- Curseur personnalisé avec traînée ---
+const cursor = document.createElement('div');
+cursor.className = 'custom-cursor';
+document.body.appendChild(cursor);
+
+// Tableau pour stocker les éléments de traînée
+const trails = [];
+const maxTrails = 12;
+
+// Création des éléments de traînée
+for (let i = 0; i < maxTrails; i++) {
+  const trail = document.createElement('div');
+  trail.className = 'cursor-trail';
+  trail.style.opacity = (1 - i / maxTrails) * 0.8;
+  document.body.appendChild(trail);
+  trails.push({
+    element: trail,
+    x: 0,
+    y: 0
+  });
+}
+
+// Position précédente de la souris
+let lastX = 0;
+let lastY = 0;
+
+// Mise à jour de la position du curseur et de la traînée
+document.addEventListener('mousemove', (e) => {
+  // Mise à jour du curseur principal
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+
+  // Calcul du mouvement
+  const dx = e.clientX - lastX;
+  const dy = e.clientY - lastY;
+  const speed = Math.sqrt(dx * dx + dy * dy);
+
+  // Mise à jour des positions de la traînée
+  for (let i = trails.length - 1; i > 0; i--) {
+    trails[i].x = trails[i - 1].x;
+    trails[i].y = trails[i - 1].y;
+  }
+
+  // Mise à jour de la première position de la traînée
+  trails[0].x = lastX;
+  trails[0].y = lastY;
+
+  // Application des positions avec délai
+  trails.forEach((trail, i) => {
+    const scale = 1 - (i / trails.length) * 0.5;
+    trail.element.style.left = trail.x + 'px';
+    trail.element.style.top = trail.y + 'px';
+    trail.element.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    trail.element.style.opacity = (1 - i / trails.length) * 0.8;
+  });
+
+  // Mise à jour de la dernière position
+  lastX = e.clientX;
+  lastY = e.clientY;
+});
+
+// Cache la traînée quand la souris quitte la fenêtre
+document.addEventListener('mouseout', () => {
+  trails.forEach(trail => {
+    trail.element.style.opacity = '0';
+  });
+});
+
+document.addEventListener('mouseover', () => {
+  trails.forEach((trail, i) => {
+    trail.element.style.opacity = (1 - i / trails.length) * 0.8;
+  });
+});
+
+// Gestion des éléments interactifs
+document.querySelectorAll('a, button, .badge').forEach(el => {
+  el.classList.add('clickable');
+  el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+});
+
 // --- Particules qui suivent la souris ---
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
+
 function resize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -15,57 +97,77 @@ const particles = Array.from({length: 48}, () => ({
   r: Math.random()*2.5+1.5,
   dx: (Math.random()-0.5)*0.5,
   dy: (Math.random()-0.5)*0.5,
-  alpha: Math.random()*0.5+0.3
+  alpha: Math.random()*0.5+0.3,
+  color: `hsl(${Math.random()*60+200}, 70%, 60%)`
 }));
 
 // Particules qui suivent la souris
 let mouseTrail = [];
+let lastMousePosition = { x: 0, y: 0 };
+
 window.addEventListener('mousemove', e => {
-  mouseTrail.push({
-    x: e.clientX,
-    y: e.clientY,
-    r: 7,
-    alpha: 1
-  });
-  if (mouseTrail.length > 24) mouseTrail.shift();
+  const dx = e.clientX - lastMousePosition.x;
+  const dy = e.clientY - lastMousePosition.y;
+  const speed = Math.sqrt(dx*dx + dy*dy);
+  
+  const count = Math.floor(speed/10) + 1;
+  for(let i = 0; i < count; i++) {
+    const ratio = i / count;
+    mouseTrail.push({
+      x: lastMousePosition.x + dx * ratio,
+      y: lastMousePosition.y + dy * ratio,
+      r: 7 + speed/20,
+      alpha: 1,
+      color: `hsl(${200 + speed}, 70%, 60%)`
+    });
+  }
+  
+  if (mouseTrail.length > 30) mouseTrail.splice(0, mouseTrail.length - 30);
+  lastMousePosition = { x: e.clientX, y: e.clientY };
 });
 
 function drawParticles() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
   // Fond
   for (const p of particles) {
     ctx.save();
     ctx.globalAlpha = p.alpha;
-    ctx.shadowColor = '#fff';
+    ctx.shadowColor = p.color;
     ctx.shadowBlur = 12;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = p.color;
     ctx.fill();
     ctx.restore();
+    
     p.x += p.dx;
     p.y += p.dy;
     if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
     if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
   }
+  
   // Traînée de la souris
   for (let i = 0; i < mouseTrail.length; i++) {
     const t = mouseTrail[i];
     ctx.save();
-    ctx.globalAlpha = t.alpha * (1 - i / mouseTrail.length);
-    ctx.shadowColor = '#fff';
+    ctx.globalAlpha = t.alpha * (1 - i/mouseTrail.length);
+    ctx.shadowColor = t.color;
     ctx.shadowBlur = 16;
     ctx.beginPath();
-    ctx.arc(t.x, t.y, t.r, 0, 2*Math.PI);
-    ctx.fillStyle = '#fff';
+    ctx.arc(t.x, t.y, t.r * (1 - i/mouseTrail.length), 0, 2*Math.PI);
+    ctx.fillStyle = t.color;
     ctx.fill();
     ctx.restore();
+    
     t.r *= 0.96;
-    t.alpha *= 0.93;
+    t.alpha *= 0.94;
   }
+  
   mouseTrail = mouseTrail.filter(t => t.alpha > 0.05 && t.r > 0.5);
   requestAnimationFrame(drawParticles);
 }
+
 drawParticles();
 
 // --- Carte 3D tilt ---

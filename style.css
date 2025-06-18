@@ -23,6 +23,7 @@ body {
   justify-content: center;
   overflow: hidden;
   position: relative;
+  cursor: none;
 }
 main {
   z-index: 2;
@@ -238,15 +239,64 @@ main {
   transition: all 0.3s ease;
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
 }
+
+.badge::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 17px;
+  background: linear-gradient(45deg, 
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 45%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 55%,
+    transparent 100%
+  );
+  z-index: -1;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
 .badge:hover {
   background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px) scale(1.05);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.1),
+    0 0 30px rgba(255, 255, 255, 0.05);
 }
+
+.badge:hover::before {
+  opacity: 1;
+  animation: neon-slide 1.5s linear infinite;
+}
+
 .badge i {
   font-size: 16px;
+  filter: drop-shadow(0 0 8px currentColor);
+  transition: all 0.3s ease;
 }
+
+.badge:hover i {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 12px currentColor);
+}
+
+@keyframes neon-slide {
+  0% {
+    transform: translateX(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(45deg);
+  }
+}
+
 .fa-html5 { color: #E34F26; }
 .fa-css3-alt { color: #1572B6; }
 .fa-python { color: #3776AB; }
@@ -485,4 +535,60 @@ main {
   .volume-slider {
     width: 80px;
   }
+}
+
+.custom-cursor {
+  width: 32px;
+  height: 32px;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  background-image: url('assets/cursor/cursor.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.cursor-trail {
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  background-image: url('assets/cursor/particle.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+}
+
+/* Amélioration des interactions */
+.clickable {
+  position: relative;
+  cursor: none;
+}
+
+.clickable::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+  z-index: -1;
+}
+
+.clickable:hover::after {
+  width: 120%;
+  height: 120%;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.clickable:active::after {
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.1s ease;
 } 
