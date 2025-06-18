@@ -127,7 +127,62 @@ function typeText() {
 window.addEventListener('DOMContentLoaded', () => {
   // Initialisation de l'audio
   const audio = document.getElementById('bg-music');
+  const soundController = document.querySelector('.sound-controller');
+  const soundToggle = document.querySelector('.sound-toggle');
+  const volumeSlider = document.querySelector('.slider');
+  const volumeIcon = soundToggle.querySelector('i');
+  let isCollapsed = false;
+
   if (audio) {
+    // Gestion du volume
+    volumeSlider.addEventListener('input', (e) => {
+      const volume = e.target.value / 100;
+      audio.volume = volume;
+      updateVolumeIcon(volume);
+    });
+
+    // Gestion du bouton mute
+    soundToggle.addEventListener('click', () => {
+      if (!isCollapsed) {
+        audio.muted = !audio.muted;
+        updateVolumeIcon(audio.muted ? 0 : volumeSlider.value / 100);
+      }
+      isCollapsed = !isCollapsed;
+      soundController.classList.toggle('collapsed');
+    });
+
+    // Gestion de l'entrée/sortie de la souris
+    soundController.addEventListener('mouseenter', () => {
+      isCollapsed = false;
+      soundController.classList.remove('collapsed');
+    });
+
+    soundController.addEventListener('mouseleave', () => {
+      isCollapsed = true;
+      soundController.classList.add('collapsed');
+    });
+
+    // Fonction pour mettre à jour l'icône du volume
+    function updateVolumeIcon(volume) {
+      volumeIcon.className = 'fas ' + 
+        (volume === 0 ? 'fa-volume-mute' :
+         volume < 0.3 ? 'fa-volume-off' :
+         volume < 0.7 ? 'fa-volume-down' :
+         'fa-volume-up');
+    }
+
+    // Initialisation du volume
+    audio.volume = volumeSlider.value / 100;
+    
+    // Auto-collapse après 3 secondes
+    setTimeout(() => {
+      if (!isCollapsed) {
+        isCollapsed = true;
+        soundController.classList.add('collapsed');
+      }
+    }, 3000);
+
+    // Gestion de l'autoplay
     audio.play().catch(() => {});
     const resumeAudio = () => {
       audio.play();

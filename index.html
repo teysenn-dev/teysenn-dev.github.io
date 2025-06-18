@@ -11,7 +11,15 @@
 </head>
 <body>
   <audio id="bg-music" src="assets/musiques/hdmi by BONES.mp3" autoplay loop hidden></audio>
-  <img id="bg-gif" src="assets/background/output-onlinegiftools.gif" style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;">
+  <div class="sound-controller">
+    <button class="sound-toggle">
+      <i class="fas fa-volume-up"></i>
+    </button>
+    <div class="volume-slider">
+      <input type="range" min="0" max="100" value="100" class="slider">
+    </div>
+  </div>
+  <img id="bg-gif" src="assets/background/b4.gif" style="position:fixed;top:0;left:0;width:100vw;height:100vh;object-fit:cover;z-index:-2;">
   <div class="scanlines"></div>
   <canvas id="bg-canvas"></canvas>
   <main>
@@ -48,6 +56,7 @@
         <a href="https://discordapp.com/users/1283319101095153705"><img src="assets/logos/discord.png" alt="Discord"></a>
         <a href="https://github.com/teysenn-dev"><img src="assets/logos/github.png" alt="GitHub"></a>
         <a href="https://www.tiktok.com/@teysennxi?_t=ZN-8xHXaB78rOY&_r=1"><img src="assets/logos/tiktok.png" alt="TikTok"></a>
+        <a href="https://www.instagram.com/teysennxbl?igsh=eHBoeTJzenh4Njg4&utm_source=qr"><img src="assets/logos/instagram.png" alt="Instagram"></a>
       </div>
     </div>
   </main>
